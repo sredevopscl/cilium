@@ -182,7 +182,7 @@ ct_entry_expired_for_rebalance(const struct ct_entry *entry, bool is_tcp)
 	/* This doesn't check last_rx_report because we don't see closing
 	 * in RX direction for CT_SERVICE.
 	 */
-	return READ_ONCE(entry->last_tx_report) + wait_time < bpf_mono_now();
+	return READ_ONCE(entry->last_tx_report) + wait_time <= bpf_mono_now();
 }
 
 static __always_inline __u8 __ct_lookup(const void *map, struct __ctx_buff *ctx,
